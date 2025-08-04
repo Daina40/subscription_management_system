@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-62s3sm6g8^g5pl3i!vp&(pa7qkoqw6%%895(7i=v5f%sw#**51
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'Subscription_app',
+    'django_celery_beat',
 ]
 
 REST_FRAMEWORK = {
@@ -33,7 +34,18 @@ REST_FRAMEWORK = {
     ]
 }
 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+from decouple import config
+
+EXCHANGE_API_KEY = config('EXCHANGE_API_KEY')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,13 +101,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
