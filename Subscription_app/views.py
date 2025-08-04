@@ -5,6 +5,9 @@ from django.utils import timezone
 from django.db import transaction
 import requests
 from decouple import config
+from django.shortcuts import render
+from django.contrib.auth.models import User
+
 
 from .models import Plan, Subscription, ExchangeRateLog
 from .serializers import (
@@ -100,3 +103,8 @@ class ExchangeRateView(APIView):
 
         except requests.RequestException as e:
             return Response({"error": f"Error fetching exchange rate: {str(e)}"}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+
+def subscriptions_list(request):
+    # Fetch all subscriptions with related user and plan
+    subscriptions = Subscription.objects.select_related('user', 'plan').all()
+    return render(request, 'subscriptions.html', {'subscriptions': subscriptions})
