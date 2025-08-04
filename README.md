@@ -27,7 +27,7 @@ REST API for subscription and exchange rate management
 Local Setup
 -------------
 1. Clone the repository -
-git clone https://github.com/your-username/django-subscription-system.git
+git clone https://github.com/Daina40/django-subscription-system.git
 cd django-subscription-system
 
 2. Create a virtual environment
