@@ -97,6 +97,11 @@ Frontend Page
 Visit http://127.0.0.1:8000/subscriptions/
 Display a table with: Username | Plane | Start Date | End Date | Status
 
+API Test in Postman
+-------------------
+Here is the link of postman testing parts-
+https://shorturl.at/snMn3
+
 Notes
 ------
 API keys are hidden for security. You must generate your own key at https://app.exchangerate-api.com or a similar provider.
